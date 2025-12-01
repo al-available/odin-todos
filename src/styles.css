@@ -1,0 +1,40 @@
+body{
+ background-image: linear-gradient(to left, #977dff,#f2e6ee);
+}
+header{
+    text-align: center;
+    font-style: italic;
+    font-size: 30px;
+}
+.btnSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+.btnSection>button{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left:70px ;
+  padding-right:70px ;
+  
+  border-style: none;
+  border-radius: 10px;
+  background-image: linear-gradient(to right,#0600ab,#977dff);
+  font-size: 20px;
+  font-weight: 200;
+  font-style: italic;
+}
+.btnSection>button:hover{
+      background-image: linear-gradient(to left,#0600ab,#977dff);
+          box-shadow: 5px 5px 10px black;
+}
+#displayContainer{
+    width: 900px;
+    height: 100px;
+    background-color: white;
+    margin-top: 20px;
+    box-shadow: 5px 5px 10px black;
+    margin-left: 250px;
+    display: none;
+}
