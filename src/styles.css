@@ -1,40 +1,97 @@
 body{
- background-image: linear-gradient(to left, #977dff,#f2e6ee);
+    background-color:rgb(115, 63, 63);
 }
-header{
+header>h1{
     text-align: center;
     font-style: italic;
-    font-size: 30px;
 }
-.btnSection{
+
+.sectionBtn{
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 50px;
+    gap: 30px;
 }
-.btnSection>button{
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left:70px ;
-  padding-right:70px ;
-  
-  border-style: none;
-  border-radius: 10px;
-  background-image: linear-gradient(to right,#0600ab,#977dff);
-  font-size: 20px;
-  font-weight: 200;
-  font-style: italic;
+
+main{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+
+
 }
-.btnSection>button:hover{
-      background-image: linear-gradient(to left,#0600ab,#977dff);
-          box-shadow: 5px 5px 10px black;
-}
-#displayContainer{
-    width: 900px;
-    height: 100px;
+#mainContainer{
+        border: 1px solid black;
+    width: 700px;
+    height: 300px;
     background-color: white;
-    margin-top: 20px;
     box-shadow: 5px 5px 10px black;
-    margin-left: 250px;
+    overflow: scroll;
     display: none;
+
+}
+
+aside{
+    margin-left: 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    
+}
+#formContainer{
+display: none;
+}
+form{
+    width: 600px;
+    height: 300px;
+     border: 1px solid black;
+    display: grid;
+    grid-template-columns: 300px 300px ;
+    grid-template-rows: 70px 70px 70px 70px;
+}
+label{
+    display: block;
+}
+form >div{
+    margin-left: 70px;
+}
+.one{
+    grid-column: 1;
+    grid-row: 2;
+}
+.two{
+    grid-column: 2;
+    grid-row: 2;
+}
+.three{
+    grid-row: 3;
+    grid-column:1 ;
+}
+.four{
+    grid-row: 3;
+    grid-column:2 ;
+}
+.five{
+    grid-row: 4;
+    grid-column:1 ;
+}
+.fiveLabel{
+    display: inline;
+}
+#submit{
+    grid-column: 2;
+    grid-row: 4;
+    width: 70px;
+    height: 30px;
+    margin-left: 70px;
+}
+#add{
+
+    margin-left: 20px;
+    width: 70px;
+    height: 30px;
+}
+legend{
+grid-column: 1/3;
+text-align: center;
+margin-top: 20px;
 }

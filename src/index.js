@@ -1,4 +1,3 @@
 import "./styles.css";
 
-import { btnView } from "./dom";
-
+import { submit,addBtn,viewBtn } from "./dom";
