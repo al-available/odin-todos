@@ -21,8 +21,15 @@ mainContainer.appendChild(display);
 
 //  toggle function
 function toggleForm() {
-  const isHidden = formContainer.style.display === "none" || !formContainer.style.display;
-  formContainer.style.display = isHidden ? "block" : "none";
+//   const isHidden = formContainer.style.display === "none" || !formContainer.style.display;
+//   formContainer.style.display = isHidden ? "block" : "none";
+
+  if(formContainer.style.display ==='none'|| !formContainer.style.display){
+    formContainer.style.display='block'
+  }
+  else{
+    formContainer.style.display='none'
+  }
 }
 
 function toggleMain() {
@@ -39,6 +46,7 @@ function displayStore() {
 
   store.forEach((item, index) => {
     const itemDiv = document.createElement("div");
+    itemDiv.classList.add('itemList')
     itemDiv.innerHTML = `
       <strong>TITLE:</strong> ${item.title} <br>
       <strong>DETAILS:</strong> ${item.details} <br><br>
