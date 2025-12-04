@@ -8,7 +8,7 @@ const addBtn = document.getElementById("add");
 const viewBtn = document.getElementById("view");
 const formContainer = document.getElementById("formContainer");
 const mainContainer = document.getElementById("mainContainer");
-
+const checkbox =document.getElementById('checkbox')
 const display = document.createElement("div");
 display.classList.add("display");
 mainContainer.appendChild(display);
@@ -48,8 +48,8 @@ function displayStore() {
     const itemDiv = document.createElement("div");
     itemDiv.classList.add('itemList')
     itemDiv.innerHTML = `
-      <strong>TITLE:</strong> ${item.title} <br>
-      <strong>DETAILS:</strong> ${item.details} <br><br>
+     <input type="checkbox" name="ticked" class="checkbox" data-index="${index}"  > <strong>TITLE:</strong><strong class="titleFormat"> ${item.title}</strong> <br>
+      <strong>DETAILS:</strong> ${item.details}
       <button class="delBtn" data-index="${index}">Delete</button>
       <hr>
     `;
@@ -97,5 +97,9 @@ viewBtn.addEventListener("click", () => {
 
 // Initial state
 displayStore();
+
+
+
+
 
 export{submit,addBtn,viewBtn}
