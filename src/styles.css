@@ -180,3 +180,20 @@ box-shadow: 5px 5px 10px black;
     margin-bottom: 10px
 
 }
+.titleFormat{
+text-decoration:none;
+color:none;
+
+}
+.titleCap{
+text-decoration:none;
+color:none;
+
+}
+
+ /* Completed items: gray + line-through   */
+.titleText.completed,
+.detailsText.completed {
+    text-decoration: line-through;
+    color: gray;
+}

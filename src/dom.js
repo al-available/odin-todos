@@ -9,7 +9,6 @@ const viewBtn = document.getElementById("view");
 const formContainer = document.getElementById("formContainer");
 const mainContainer = document.getElementById("mainContainer");
 const display = document.createElement("div");
-const titleChange=document.querySelector('titleFormat')
 display.classList.add("display");
 mainContainer.appendChild(display);
 
@@ -36,9 +35,7 @@ function toggleMain() {
   const isHidden = mainContainer.style.display === "none" || !mainContainer.style.display;
   mainContainer.style.display = isHidden ? "block" : "none";
 }
-function titleColor(){
-  titleChange.style.color='red'
-}
+
 
 function displayStore() {
   display.innerHTML = "";
@@ -51,13 +48,20 @@ function displayStore() {
     const itemDiv = document.createElement("div");
     itemDiv.classList.add('itemList')
     itemDiv.innerHTML = `
-     <input type="checkbox" name="ticked" class="checkbox" data-index="${index}"  > 
-     <strong>TITLE:</strong><strong class="titleFormat"> ${item.title}</strong> <br>
-      <strong>DETAILS:</strong> ${item.details}
+     <input type="checkbox" name="ticked" class="checkbox" data-index="${index}" ${item.completed ? 'checked' : ''} > 
+     <strong class='titleCap'>TITLE:</strong><span class="titleFormat titleText" data-index="${index}"> ${item.title}</span> <br>
+      <strong>DETAILS:</strong> <span class="detailsText" data-index="${index}">${item.details}</span>
       <button class="delBtn" data-index="${index}">Delete</button>
       <hr>
     `;
     display.appendChild(itemDiv);
+    // apply completed styling if needed
+    if (item.completed) {
+      const titleEl = itemDiv.querySelector('.titleText');
+      const detailsEl = itemDiv.querySelector('.detailsText');
+      if (titleEl) titleEl.classList.add('completed');
+      if (detailsEl) detailsEl.classList.add('completed');
+    }
   });
 
   document.querySelectorAll(".delBtn").forEach(btn => {
@@ -68,13 +72,30 @@ function displayStore() {
       displayStore();
     });
   });
-  document.querySelectorAll('.checkbox').forEach(checkBox =>{
-    checkBox.addEventListener('change',()=>{
-      const index =parseInt(checkBox.dataset.index)
-      store[index].completed=!!checkBox.checked
+  
+    document.querySelectorAll('.checkbox').forEach(checkBox =>{
+    checkBox.addEventListener('click',()=>{
+      const index = parseInt(checkBox.dataset.index, 10)
+      const titleEl = display.querySelector(`.titleText[data-index="${index}"]`)
+      const detailsEl = display.querySelector(`.detailsText[data-index="${index}"]`)
+      const checked = checkBox.checked
+
+      if (titleEl) {
+        if (checked) titleEl.classList.add('completed')
+        else titleEl.classList.remove('completed')
+      }
+      if (detailsEl) {
+        if (checked) detailsEl.classList.add('completed')
+        else detailsEl.classList.remove('completed')
+      }
+
+      if (typeof store[index] !== 'undefined') {
+        store[index].completed = checked
+        saveUp()
+      }
+
     })
   });
-  
 }
 
 function clearForm() {
@@ -90,7 +111,7 @@ submit.addEventListener("click", (e) => {
     addToStore(userInfo);
     saveUp()
     clearForm();
-    toggleForm(); // hide form after submit
+    toggleForm(); 
     displayStore();
   }
 });
