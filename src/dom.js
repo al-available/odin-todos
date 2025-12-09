@@ -1,5 +1,5 @@
 
-import { store,Info,addToStore } from "./appLogic";
+import { store,Info,addToStore,loadUp,saveUp } from "./appLogic";
 
 const title = document.getElementById("title");
 const details = document.getElementById("details");
@@ -8,8 +8,8 @@ const addBtn = document.getElementById("add");
 const viewBtn = document.getElementById("view");
 const formContainer = document.getElementById("formContainer");
 const mainContainer = document.getElementById("mainContainer");
-const checkbox =document.getElementById('checkbox')
 const display = document.createElement("div");
+const titleChange=document.querySelector('titleFormat')
 display.classList.add("display");
 mainContainer.appendChild(display);
 
@@ -36,6 +36,9 @@ function toggleMain() {
   const isHidden = mainContainer.style.display === "none" || !mainContainer.style.display;
   mainContainer.style.display = isHidden ? "block" : "none";
 }
+function titleColor(){
+  titleChange.style.color='red'
+}
 
 function displayStore() {
   display.innerHTML = "";
@@ -48,7 +51,8 @@ function displayStore() {
     const itemDiv = document.createElement("div");
     itemDiv.classList.add('itemList')
     itemDiv.innerHTML = `
-     <input type="checkbox" name="ticked" class="checkbox" data-index="${index}"  > <strong>TITLE:</strong><strong class="titleFormat"> ${item.title}</strong> <br>
+     <input type="checkbox" name="ticked" class="checkbox" data-index="${index}"  > 
+     <strong>TITLE:</strong><strong class="titleFormat"> ${item.title}</strong> <br>
       <strong>DETAILS:</strong> ${item.details}
       <button class="delBtn" data-index="${index}">Delete</button>
       <hr>
@@ -60,9 +64,17 @@ function displayStore() {
     btn.addEventListener("click", () => {
       const index = parseInt(btn.dataset.index);
       store.splice(index, 1);
+      saveUp()
       displayStore();
     });
   });
+  document.querySelectorAll('.checkbox').forEach(checkBox =>{
+    checkBox.addEventListener('change',()=>{
+      const index =parseInt(checkBox.dataset.index)
+      store[index].completed=!!checkBox.checked
+    })
+  });
+  
 }
 
 function clearForm() {
@@ -73,9 +85,10 @@ function clearForm() {
 // Submit
 submit.addEventListener("click", (e) => {
   e.preventDefault();
-  if (title.value.trim() && details.value) {
-    const userInfo = new Info(title.value.trim(), details.value);
+  if (title.value.trim() && details.value.trim()) {
+    const userInfo = new Info(title.value.trim(), details.value.trim());
     addToStore(userInfo);
+    saveUp()
     clearForm();
     toggleForm(); // hide form after submit
     displayStore();
@@ -96,7 +109,9 @@ viewBtn.addEventListener("click", () => {
 });
 
 // Initial state
+loadUp()
 displayStore();
+
 
 
 
